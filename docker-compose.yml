@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  laravel-api:
+    build:
+      context: .
+    image: alpine-laravel:latest
+    # command: ["tail", "-f", "/dev/null"] # sit env
+    command: ["sh", "start.sh"] # prod env
+    ports:
+      - "8888:80"
+    volumes:
+      - ${DEFAULT_PATH}/web:/var/www/localhost/htdocs
+    networks:
+      - network_sql
+
+  laravel-mysql:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+    ports:
+      - "13306:3306"
+    volumes:
+      - ${DEFAULT_PATH}/db:/var/lib/mysql
+    networks:
+      - network_sql
+
+networks:
+  network_sql:
+    driver: bridge
+    
