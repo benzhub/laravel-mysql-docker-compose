@@ -4,8 +4,8 @@ services:
     build:
       context: .
     image: alpine-laravel:latest
-    # command: ["tail", "-f", "/dev/null"] # sit env
-    command: ["sh", "start.sh"] # prod env
+    command: ["tail", "-f", "/dev/null"] # prod env
+    # command: ["sh", "start.sh"] # sit env
     ports:
       - "8888:80"
     volumes:
